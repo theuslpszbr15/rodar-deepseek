@@ -31,9 +31,15 @@ set "LANIP="
 for /f "usebackq delims=" %%I in (`powershell -NoProfile -Command "(Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -and $_.NetAdapter.Status -eq 'Up' } | Select-Object -First 1).IPv4Address.IPAddress"`) do set "LANIP=%%I"
 if not defined LANIP echo [rodar] Nao achei o IP da rede local. Conecte-se ao Wi-Fi e tente de novo.& exit /b 1
 set "ARGS=--host %LANIP% --trusted-host %LANIP%:3080 --no-open %3 %4 %5 %6 %7 %8 %9"
-echo [rodar] modo celular: abra no celular, no MESMO Wi-Fi, a URL com token impressa abaixo.
+echo [rodar] modo celular: aponte a camera do celular, no MESMO Wi-Fi, para o QR code que vai aparecer abaixo.
 echo [rodar] Se o Windows pedir, permita o acesso em redes privadas. Use so em Wi-Fi de confianca ^(HTTP sem criptografia^).
 
 :run
 echo [rodar] iniciando DeepSeek Harness ^(Ctrl+C para parar^)
+if defined LANIP goto runqr
 npx.cmd --yes @deepseek-ai/dsh web %ARGS%
+exit /b
+
+:runqr
+rem Repassa a saida do dsh e, ao ver a URL com token, mostra um QR code para a camera do celular.
+npx.cmd --yes @deepseek-ai/dsh web %ARGS% 2>&1 | powershell -NoProfile -Command "$input | ForEach-Object { $_; if ($_ -match 'http://\S+token=\S+') { Write-Host ''; Write-Host 'Aponte a camera do celular para o QR code:'; $Matches[0] | npx.cmd --yes qrcode-terminal } }"

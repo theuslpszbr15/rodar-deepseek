@@ -36,12 +36,11 @@ Use o Harness no celular, sem instalar nada extra.
    rodar deepseek --celular
    ```
 3. Se o Windows perguntar sobre o **firewall**, clique em **Permitir acesso** (em redes privadas).
-4. Espere aparecer uma linha parecida com esta no terminal:
-   ```
-   dsh web: http://192.168.0.10:3080/?token=XXXXXXXX
-   ```
-5. No celular, abra o navegador e digite **exatamente esse endereço**, com o `?token=...` no final. Pode também enviar o link para você mesmo por mensagem e abrir por lá.
+4. Espere aparecer um **QR code** no terminal (na primeira vez pode levar alguns segundos a mais).
+5. No celular, abra a **câmera**, aponte para o QR code e toque no link que aparecer.
 6. Pronto. Para encerrar, use `Ctrl+C` no terminal do PC.
+
+O QR code já leva o endereço com o token, então não precisa digitar nada. Se a câmera não ler, o endereço também aparece escrito no terminal (`http://...?token=...`) e dá para digitá-lo no navegador do celular.
 
 **Não abre no celular?**
 - Confira se os dois estão no mesmo Wi-Fi (não use dados móveis nem Wi-Fi de visitantes).
