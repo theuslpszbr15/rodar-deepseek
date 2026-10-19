@@ -24,5 +24,16 @@ if defined HTTPS_PROXY (
 rem Fora de pastas com workspace local, o npx nao acha o binario "dsh".
 cd /d "%USERPROFILE%"
 set "ARGS=%2 %3 %4 %5 %6 %7 %8 %9"
+
+rem --celular: serve no IP da rede local (mesmo Wi-Fi) para abrir no celular.
+if /i not "%~2"=="--celular" goto run
+set "LANIP="
+for /f "usebackq delims=" %%I in (`powershell -NoProfile -Command "(Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -and $_.NetAdapter.Status -eq 'Up' } | Select-Object -First 1).IPv4Address.IPAddress"`) do set "LANIP=%%I"
+if not defined LANIP echo [rodar] Nao achei o IP da rede local. Conecte-se ao Wi-Fi e tente de novo.& exit /b 1
+set "ARGS=--host %LANIP% --trusted-host %LANIP%:3080 --no-open %3 %4 %5 %6 %7 %8 %9"
+echo [rodar] modo celular: abra no celular, no MESMO Wi-Fi, a URL com token impressa abaixo.
+echo [rodar] Se o Windows pedir, permita o acesso em redes privadas. Use so em Wi-Fi de confianca ^(HTTP sem criptografia^).
+
+:run
 echo [rodar] iniciando DeepSeek Harness ^(Ctrl+C para parar^)
 npx.cmd --yes @deepseek-ai/dsh web %ARGS%

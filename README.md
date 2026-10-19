@@ -24,6 +24,16 @@ Ele instala o Node.js se faltar (via `winget`) e registra o comando `rodar`.
 
 Para parar, use `Ctrl+C` no terminal. Opções do `dsh web` passam direto: `rodar deepseek --no-open`.
 
+## Abrir no celular
+
+Com o celular no **mesmo Wi-Fi** do PC:
+
+```
+rodar deepseek --celular
+```
+
+Abra no celular a URL com `?token=...` impressa no terminal. Se o Windows perguntar sobre o firewall, permita em redes privadas. A conexão é HTTP sem criptografia: use só em Wi-Fi de confiança e nunca exponha a porta na internet.
+
 ## O que o script faz
 
 - Usa o pacote oficial `@deepseek-ai/dsh` via `npx`, sem copiar nem alterar o código do projeto.
