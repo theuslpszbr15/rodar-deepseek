@@ -26,13 +26,29 @@ Para parar, use `Ctrl+C` no terminal. Opções do `dsh web` passam direto: `roda
 
 ## Abrir no celular
 
-Com o celular no **mesmo Wi-Fi** do PC:
+Use o Harness no celular, sem instalar nada extra.
 
-```
-rodar deepseek --celular
-```
+**Antes de começar:** o PC e o celular precisam estar no **mesmo Wi-Fi** (de casa, por exemplo), e o PC deve ficar ligado.
 
-Abra no celular a URL com `?token=...` impressa no terminal. Se o Windows perguntar sobre o firewall, permita em redes privadas. A conexão é HTTP sem criptografia: use só em Wi-Fi de confiança e nunca exponha a porta na internet.
+1. No PC, feche o Harness se ele já estiver aberto (`Ctrl+C` no terminal).
+2. Abra um terminal e digite:
+   ```
+   rodar deepseek --celular
+   ```
+3. Se o Windows perguntar sobre o **firewall**, clique em **Permitir acesso** (em redes privadas).
+4. Espere aparecer uma linha parecida com esta no terminal:
+   ```
+   dsh web: http://192.168.0.10:3080/?token=XXXXXXXX
+   ```
+5. No celular, abra o navegador e digite **exatamente esse endereço**, com o `?token=...` no final. Pode também enviar o link para você mesmo por mensagem e abrir por lá.
+6. Pronto. Para encerrar, use `Ctrl+C` no terminal do PC.
+
+**Não abre no celular?**
+- Confira se os dois estão no mesmo Wi-Fi (não use dados móveis nem Wi-Fi de visitantes).
+- Redes de empresa e de visitantes costumam bloquear a comunicação entre aparelhos. Nesse caso, teste numa rede doméstica.
+- O token muda toda vez que você inicia. Use sempre o endereço novo.
+
+**Segurança:** a conexão é HTTP, sem criptografia. Use só em Wi-Fi de confiança e nunca libere a porta 3080 no roteador nem na internet: o Harness executa comandos no seu computador.
 
 ## O que o script faz
 
