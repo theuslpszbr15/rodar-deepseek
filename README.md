@@ -1,29 +1,40 @@
 # rodar-deepseek
 
-Atalho para subir o [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`, licença MIT) com um comando:
+Rode o [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) no Windows com um único comando:
 
 ```
 rodar deepseek
 ```
 
-Não copia nem modifica o código do projeto: usa o pacote oficial `@deepseek-ai/dsh` via `npx`, então sempre pega a versão publicada.
+## Instalação (1 passo)
 
-## Requisitos
-- Windows e Node.js 22.19+ ou 24+. Nada mais para instalar.
+Abra o **Prompt de Comando** ou o **PowerShell**, cole a linha abaixo e tecle Enter:
 
-## Instalação
 ```
-git clone <url-deste-repo>
-cd rodar-deepseek
-install.cmd
+powershell -NoProfile -Command "irm https://raw.githubusercontent.com/theuslpszbr15/rodar-deepseek/main/install.ps1 | iex"
 ```
-Abra um novo terminal e rode `rodar deepseek`. O navegador abre sozinho em `http://127.0.0.1:3080`.
+
+Ele instala o Node.js se faltar (via `winget`) e registra o comando `rodar`.
+
+## Uso
+
+1. Abra um **novo** terminal e digite `rodar deepseek`.
+2. O navegador abre sozinho em `http://127.0.0.1:3080`.
+3. Em **Settings > Models**, cole sua chave de API (ex.: criada em [platform.deepseek.com](https://platform.deepseek.com)).
+
+Para parar, use `Ctrl+C` no terminal. Opções do `dsh web` passam direto: `rodar deepseek --no-open`.
 
 ## O que o script faz
-- Detecta o proxy do sistema (PAC/WinHTTP) e o repassa ao Node, que não o usa sozinho. Para forçar um, defina `HTTPS_PROXY` antes.
-- Roda a partir da pasta do usuário e usa `npx.cmd`, evitando o bloqueio de scripts do PowerShell.
-- Repassa opções ao `dsh web`, por exemplo `rodar deepseek --no-open`.
 
-## Dicas
-- Porta 3080 em uso: já há uma instância rodando. Feche-a ou use a URL com token que ela imprimiu.
-- A chave de API (ex.: `platform.deepseek.com`) é configurada na interface, em Settings > Models. Ela não fica neste repositório.
+- Usa o pacote oficial `@deepseek-ai/dsh` via `npx`, sem copiar nem alterar o código do projeto.
+- Detecta o proxy do sistema e o repassa ao Node, que não o usa sozinho. Para forçar um, defina `HTTPS_PROXY` antes.
+- Usa `npx.cmd`, evitando o bloqueio de scripts do PowerShell.
+- Avisa se a porta 3080 já estiver em uso.
+
+## Atualizar
+
+Rode de novo a linha de instalação.
+
+## Licença
+
+[MIT](LICENSE)
